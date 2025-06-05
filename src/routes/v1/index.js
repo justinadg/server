@@ -3,11 +3,10 @@ const appointmentRoute = require('./appointment.route');
 const authRoute = require('./auth.route');
 const userRoute = require('./user.route');
 const staffRoute = require('./staff.route');
-const serviceRoute = require('./service.route'); // Import the service route
-const serviceCategoryRoute = require('./serviceCategory.route'); // Import the service category route
+const serviceRoute = require('./service.route'); 
+const serviceCategoryRoute = require('./serviceCategory.route');
 const reviewRoute = require('./review.route');
 const healthController = require('../../controllers/health.controller');
-const docsRoute = require('./docs.route');
 const config = require('../../config/config');
 const stockRoute = require('./stock.route');
 const router = express.Router();
@@ -51,23 +50,9 @@ const defaultRoutes = [
   },
 ];
 
-const devRoutes = [
-  // routes available only in development mode
-  {
-    path: '/docs',
-    route: docsRoute,
-  },
-];
-
 defaultRoutes.forEach((route) => {
   router.use(route.path, route.route);
 });
 
-/* istanbul ignore next */
-if (config.env === 'development') {
-  devRoutes.forEach((route) => {
-    router.use(route.path, route.route);
-  });
-}
 
 module.exports = router;

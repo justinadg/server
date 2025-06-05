@@ -48,7 +48,10 @@ const stockSchema = new mongoose.Schema(
       required: true,
       min: 0,
     },
-    history: [stockHistorySchema],
+    history: {
+      type: [stockHistorySchema],
+      default: []
+    },
   },
   {
     timestamps: true,

@@ -22,6 +22,20 @@ const updateStockById = async (stockId, updateBody) => {
   if (!stock) {
     throw new Error('Stock item not found');
   }
+
+  if (updateBody.quantity !== undefined && updateBody.quantity !== stock.quantity) {
+    const change = updateBody.quantity - stock.quantity;
+    const operation = change > 0 ? 'restock' : 'usage';
+    
+    stock.history.push({
+      type: stock.type,
+      category: stock.category,
+      price: stock.price,
+      change: Math.abs(change),
+      operation
+    });
+  }
+
   Object.assign(stock, updateBody);
   await stock.save();
   return stock;

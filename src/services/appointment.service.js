@@ -55,5 +55,5 @@ module.exports = {
   getAppointmentById,
   updateAppointmentById,
   deleteAppointmentById,
-  getAppointmentByCategoryAndTime, // Add this new export
+  getAppointmentByCategoryAndTime,
 };

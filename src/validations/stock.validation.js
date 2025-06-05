@@ -58,11 +58,10 @@ const updateStock = {
     type: Joi.string(),
     category: Joi.string().valid('Oil', 'Tire', 'Brake'),
     price: Joi.number().positive(),
-    quantity: Joi.number().min(0),
-    operation: Joi.string().valid('restock', 'usage'),
-    change: Joi.number().positive()                   
+    quantity: Joi.number().min(0)
   }).min(1)
 };
+
 
 const deleteStock = {
   params: Joi.object().keys({
