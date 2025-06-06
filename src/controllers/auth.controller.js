@@ -59,7 +59,11 @@ const sendVerificationEmail = catchAsync(async (req, res) => {
 });
 
 const verifyEmail = catchAsync(async (req, res) => {
-  await authService.verifyEmail(req.query.token);
+  const token = req.query.token || req.body.token; 
+  if (!token) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Verification token is required');
+  }
+  await authService.verifyEmail(token);
   res.status(httpStatus.OK).send({ message: 'Email verified successfully' });
 });
 
